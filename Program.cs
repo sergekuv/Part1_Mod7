@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Part1_Mod7
 {
+    #region Task_7_5_8
     static class IntExtensions
     {
         public static int GetNegative(this ref int x)   // Можно и не возвращать значение, а просто изменить значение параметра. 
@@ -18,6 +19,7 @@ namespace Part1_Mod7
         }
 
     }
+    #endregion
 
     class Program
     {
@@ -35,10 +37,110 @@ namespace Part1_Mod7
             //Task_7_5_2();
             //Task_7_5_3();
             //Task_7_5_5();
-            Task_7_5_8();
+            //Task_7_5_8();
+            //Task_7_6_2();
+            //Task_7_6_6();
+            //Task_7_6_7();   // Added to 7_6_2
+            //Task_7_6_2()    // and also 7_6_10 - added to 7_6_2
 
             Console.WriteLine("-- End --");
         }
+
+
+        #region Task_7_6_7
+        private static void Task_7_6_7()    // Added to 7_6_2
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion Task_7_6_7
+
+        #region Task_7_6_6
+        private static void Task_7_6_6()    // Реализуйте класс-обобщение Record, у которого будут два универсальных параметра: один — для идентификатора записи (Id),
+                                            // другой — для значения записи (Value). Также в классе реализуйте поле Date типа DateTime.
+        {
+            throw new NotImplementedException();
+        }
+
+        class Record<T, V>
+        {
+            T id;
+            V value;
+            DateTime date;
+        }
+
+        #endregion Task_7_6_6
+
+        #region Task_7_6_2
+        private static void Task_7_6_2()    // Создайте класс-обобщение Car для автомобиля. Универсальным параметром будет тип двигателя в автомобиле
+                                            // (электрический и бензиновый). Для типов двигателей также создайте классы — ElectricEngine и GasEngine.
+                                            // В классе Car создайте поле Engine в качестве типа которому укажите универсальный параметр.
+        {
+            throw new NotImplementedException();
+        }
+
+        abstract class Engine : AutoPart
+        {
+            int power;
+        }
+        class ElectricEngine : Engine
+        {
+            int voltage;
+        }
+        class GasEngine : Engine
+        {
+            int octaneValue;
+        }
+
+        class AutoPart
+        {
+            string partNumber;
+            string serialNumber;
+            string description;
+            public virtual void ShowPart()
+            {
+                Console.WriteLine($"AutoPart: PN {partNumber}, SN {serialNumber}, desciption {description} ");
+            }
+        }
+        class NonEnginePart : AutoPart
+        {
+            public override void ShowPart()
+            {
+                Console.Write("NonEnginePart ");
+                base.ShowPart();
+            }
+        }
+        class Battery : NonEnginePart
+        {
+        }
+        class Differential : NonEnginePart
+        {
+        }
+        class Wheel : NonEnginePart
+        {
+        }
+
+
+        abstract class Car<TEngine> where TEngine : Engine
+        {
+            TEngine engine;
+            int price;
+            virtual public void ChangePart<TPart>(TPart newPart) where TPart : NonEnginePart
+            {
+
+            }
+        }
+
+        class ElectricCar : Car<ElectricEngine>
+        {
+
+        }
+        class GasCar : Car<GasEngine>
+        {
+
+        }
+
+        #endregion Task_7_6_2
 
         #region Task_7_5_8
         private static void Task_7_5_8()
